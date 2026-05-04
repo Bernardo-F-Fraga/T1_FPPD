@@ -74,8 +74,7 @@ func TaskProcess(TaskId int, in chan mensagem, out chan mensagem, leader int) {
 	var finish bool = false
 
 	for !finish {
-		temp := <-in // ler mensagem (só esta consumindo uma mensagem)
-					// no trabalho precisa ser um laço e funcioar até uma mensagem de término
+		temp := <-in
 					
 		fmt.Printf("%2d: recebi mensagem %d, [ %d, %d, %d, %d ]\n", TaskId, temp.tipo, temp.corpo[0], temp.corpo[1], temp.corpo[2], temp.corpo[3])
 
