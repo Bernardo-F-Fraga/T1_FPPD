@@ -40,6 +40,10 @@ func ElectionControler(in chan int) {
 	chans[3] <- temp
 	fmt.Printf("Controle: mudar o processo 0 para falho\n")
 
+	temp.tipo = 1
+	chans[1] <- temp
+	fmt.Printf("Controle: solicitar eleição ao processo 2\n")
+
 	fmt.Printf("Controle: confirmação %d\n", <-in) // receber e imprimir confirmação
 
 	// mudar o processo 1 - canal de entrada 0 - para falho (defini mensagem tipo 2 pra isto)
@@ -79,24 +83,29 @@ func TaskProcess(TaskId int, in chan mensagem, out chan mensagem, leader int) {
 		fmt.Printf("%2d: recebi mensagem %d, [ %d, %d, %d, %d ]\n", TaskId, temp.tipo, temp.corpo[0], temp.corpo[1], temp.corpo[2], temp.corpo[3])
 
 		switch temp.tipo {
-		case 2:
+		case 1: // MK: Controlador Solicitou Eleição
+			{
+				fmt.Printf("%2d: Eleição\n", TaskId)
+			}
+		case 2: // MK: Processo Falhou
 			{
 				bFailed = true
 				fmt.Printf("%2d: falho %v \n", TaskId, bFailed)
 				fmt.Printf("%2d: lider atual %d\n", TaskId, actualLeader)
 				controle <- -5
 			}
-		case 3:
+		case 3: // MK: Processo Reviveu
 			{
 				bFailed = false
 				fmt.Printf("%2d: falho %v \n", TaskId, bFailed)
 				fmt.Printf("%2d: lider atual %d\n", TaskId, actualLeader)
 				controle <- -5
 			}
-		case 4:
-			finish = true
-			break
-		default:
+		case 4: // MK: Processo Terminou
+			{
+				finish = true
+			}
+		default: // MK: Mensagem não Reconhecida
 			{
 				fmt.Printf("%2d: não conheço este tipo de mensagem\n", TaskId)
 				fmt.Printf("%2d: lider atual %d\n", TaskId, actualLeader)
