@@ -83,9 +83,14 @@ func TaskProcess(TaskId int, in chan mensagem, out chan mensagem, leader int) {
 		fmt.Printf("%2d: recebi mensagem %d, [ %d, %d, %d, %d ]\n", TaskId, temp.tipo, temp.corpo[0], temp.corpo[1], temp.corpo[2], temp.corpo[3])
 
 		switch temp.tipo {
+		case 0:// MK: Recebeu mensagem de eleição do processo anterior
+			{
+				// MK: Em caso do processo estar falho, só passa adiante a mensagem sem registrar seu taskId.
+			}
 		case 1: // MK: Controlador Solicitou Eleição
 			{
 				fmt.Printf("%2d: Eleição\n", TaskId)
+				
 			}
 		case 2: // MK: Processo Falhou
 			{
@@ -104,6 +109,10 @@ func TaskProcess(TaskId int, in chan mensagem, out chan mensagem, leader int) {
 		case 4: // MK: Processo Terminou
 			{
 				finish = true
+			}
+		case 5: // MK: Eleição concluída - Recebendo informaçã de novo líder
+			{
+				
 			}
 		default: // MK: Mensagem não Reconhecida
 			{
