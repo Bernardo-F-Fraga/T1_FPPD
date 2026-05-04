@@ -49,7 +49,7 @@ func ElectionControler(in chan int) {
 	fmt.Printf("Controle: mudar o processo 1 para falho\n")
 	fmt.Printf("Controle: confirmação %d\n", <-in) // receber e imprimir confirmação
 
-	// matar os outrs processos com mensagens não conhecidas (só pra cosumir a leitura)
+	// MK: mata os processos para finalizar totalmente o programa
 
 	temp.tipo = 4
 	chans[0] <- temp
