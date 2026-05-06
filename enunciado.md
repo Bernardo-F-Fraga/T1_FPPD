@@ -1,4 +1,3 @@
-
 Ir para o conteúdo principal
 Condições de conclusão
 
@@ -6,7 +5,7 @@ Implementar o algoritmo distribuído de eleição baseado em anel lógico (Ring 
 
     Baseado no uso de um anel lógico;
     Cada processo conhece o anel inteiro, mas manda mensagens somente para o próximo processo ativo no sentido do anel;
-    Quando processo detecta que o coordenador não está mais ativo (isto pode ser simulado com uma mensagem de um processo externo), ele envia uma mensagem de eleição no anel contendo seu id (disputando esta coordenação que está vaga;
+    Quando processo detecta que o coordenador não está mais ativo (isto pode ser simulado com uma mensagem de um processo externo), ele envia uma mensagem de eleição no anel contendo seu id (disputando esta coordenação que está vaga);
     A cada passo, o processo que recebe a mensagem de eleição inclui seu id na mensagem e passa adiante no anel
     No final de uma volta completa, o processo que iniciou a eleição recebe a mensagem e escolhe aquele que tem maior id como novo processo coordenador;
     Uma nova mensagem é enviada através do anel para que todos conheçam o novo coordenador;
@@ -37,7 +36,5 @@ Relatório deve incluir:
 - apresentação de como o algoritmo foi testado e que operações foram feitas nestes testes (papel do processo externo)
 
 (ver a rubrica de avaliação na sala de envio para mais detalhes)
-
-
 
 Última atualização: quarta-feira, 29 abr. 2026, 15:37
